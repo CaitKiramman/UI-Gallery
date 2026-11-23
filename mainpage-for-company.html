@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workflow Portal — Landing Page UI</title>
+  <meta name="description" content="Workflow portal landing page with an animated layered-wave hero. Pure HTML/CSS/SVG.">
+  <style>
+    html, body { margin: 0; padding: 0; background: #f7f8fc; }
+  </style>
+</head>
+<body>
+
+  <div id="portal-root">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    #portal-root {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f8fc;
+      color: #0f0f14;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    #portal-root .portal-header {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: #ffffff;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(15,15,20,.08);
+    }
+
+    #portal-root .portal-wave-wrap {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    #portal-root .portal-wave-svg {
+      position: absolute;
+      bottom: 0;
+      left: -60px;
+      width: calc(100% + 120px);
+      height: 220px;
+    }
+
+    @keyframes portal-wave1 {
+      0%   { transform: translateX(0px) scaleX(1); }
+      40%  { transform: translateX(40px) scaleX(1.02); }
+      100% { transform: translateX(0px) scaleX(1); }
+    }
+    @keyframes portal-wave2 {
+      0%   { transform: translateX(0px); }
+      50%  { transform: translateX(-50px); }
+      100% { transform: translateX(0px); }
+    }
+    @keyframes portal-wave3 {
+      0%   { transform: translateX(0px); }
+      60%  { transform: translateX(60px); }
+      100% { transform: translateX(0px); }
+    }
+    @keyframes portal-title-fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #portal-root .portal-wave-svg.l1 {
+      animation: portal-wave1 7s ease-in-out infinite;
+      bottom: -10px;
+    }
+    #portal-root .portal-wave-svg.l2 {
+      animation: portal-wave2 9s ease-in-out infinite;
+      height: 170px;
+      bottom: -5px;
+      opacity: 0.55;
+    }
+    #portal-root .portal-wave-svg.l3 {
+      animation: portal-wave3 11s ease-in-out infinite;
+      height: 130px;
+      bottom: 0;
+      opacity: 0.3;
+    }
+
+    #portal-root .portal-header-text {
+      position: relative;
+      z-index: 3;
+      height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: portal-title-fade .9s ease-out both;
+    }
+
+    #portal-root .portal-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: .24em;
+      text-indent: .24em;
+      color: #1a1a1a;
+      line-height: 1;
+      margin-bottom: .16em;
+    }
+
+    #portal-root .portal-title-sub1 {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .34em;
+      text-indent: .34em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: .5em;
+    }
+
+    #portal-root .portal-title-sub2 {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .26em;
+      text-indent: .26em;
+      text-transform: uppercase;
+      color: #6b6b80;
+    }
+
+    /* ── SECTIONS ── */
+    #portal-root .portal-section {
+      width: calc(100% - 64px);
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 52px 0 0;
+    }
+
+    #portal-root .portal-section-label {
+      font-size: .62rem;
+      font-weight: 800;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: #6b6b80;
+      margin-bottom: 22px;
+      text-indent: .38em;
+    }
+
+    /* ── GRID ── */
+    #portal-root .portal-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    }
+
+    #portal-root .portal-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 700px;
+    }
+
+    #portal-root .portal-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* ── CARD ── */
+    #portal-root .portal-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #0f0f14;
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 26px;
+      border: 1px solid rgba(15,15,20,.08);
+      box-shadow: 0 4px 24px rgba(15,15,20,.045);
+      overflow: hidden;
+      min-height: 196px;
+      transition: transform .26s ease, box-shadow .26s ease, border-color .26s ease;
+    }
+
+    #portal-root .portal-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(15,15,20,.10);
+      border-color: rgba(108,99,255,.22);
+    }
+
+    /* top bar — one span per card with inline background */
+    #portal-root .portal-card-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 22px 22px 0 0;
+      opacity: .82;
+    }
+
+    /* glow orb */
+    #portal-root .portal-card-glow {
+      position: absolute;
+      right: -50px;
+      bottom: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      opacity: .1;
+      pointer-events: none;
+      transition: opacity .28s, transform .28s;
+    }
+
+    #portal-root .portal-card:hover .portal-card-glow {
+      opacity: .18;
+      transform: scale(1.1) translate(-6px, -6px);
+    }
+
+    #portal-root .portal-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      background: #f7f8fc;
+      border: 1px solid rgba(15,15,20,.08);
+      flex-shrink: 0;
+    }
+
+    #portal-root .portal-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: #2a2a35;
+      stroke-width: 1.7;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    #portal-root .portal-card-kicker {
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: #6b6b80;
+      margin-bottom: 8px;
+    }
+
+    #portal-root .portal-card-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.2;
+      color: #0f0f14;
+      margin-bottom: 10px;
+    }
+
+    #portal-root .portal-card-desc {
+      font-size: .86rem;
+      line-height: 1.65;
+      color: #6b6b80;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    #portal-root .portal-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .65rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #0f0f14;
+      padding: 8px 13px;
+      background: #f7f8fc;
+      border: 1px solid rgba(15,15,20,.08);
+      border-radius: 999px;
+      margin-top: auto;
+      width: fit-content;
+      transition: background .2s;
+    }
+
+    #portal-root .portal-card:hover .portal-card-cta {
+      background: #fff;
+    }
+
+    /* ── DIVIDER ── */
+    #portal-root .portal-divider {
+      width: calc(100% - 64px);
+      max-width: 900px;
+      height: 1px;
+      margin: 60px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(0,212,216,.4), rgba(108,99,255,.3), rgba(255,95,210,.25), transparent);
+    }
+
+    /* ── FOOTER ── */
+    #portal-root .portal-footer {
+      text-align: center;
+      padding: 48px 24px 56px;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #6b6b80;
+    }
+
+    @media (max-width: 900px) {
+      #portal-root .portal-grid { grid-template-columns: repeat(2, 1fr); }
+      #portal-root .portal-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      #portal-root .portal-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      #portal-root .portal-header { height: 220px; }
+      #portal-root .portal-header-text { height: 220px; }
+      #portal-root .portal-title { font-size: 1.9rem; letter-spacing: .18em; }
+      #portal-root .portal-grid,
+      #portal-root .portal-grid.cols-2,
+      #portal-root .portal-grid.cols-3 { grid-template-columns: 1fr; }
+      #portal-root .portal-section { width: calc(100% - 32px); padding-top: 36px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #portal-root .portal-wave-svg,
+      #portal-root .portal-header-text { animation: none !important; }
+      #portal-root .portal-card,
+      #portal-root .portal-card-glow,
+      #portal-root .portal-card-cta { transition: none !important; }
+    }
+  </style>
+
+
+
+
+  <style>
+    #portal-root .portal-stat-bar { display:flex; gap:1px; background:rgba(15,15,20,.08); border-top:1px solid rgba(15,15,20,.08); border-bottom:1px solid rgba(15,15,20,.08); overflow:hidden; }
+    #portal-root .portal-stat { flex:1; background:#fff; padding:16px 24px; text-align:center; }
+    #portal-root .portal-stat-num { font-size:1.4rem; font-weight:800; letter-spacing:-.03em; color:#6c63ff; display:block; }
+    #portal-root .portal-stat-label { font-size:.62rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:#6b6b80; margin-top:2px; display:block; }
+  </style>
+
+
+
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <div class="portal-header">
+
+    <div class="portal-wave-wrap">
+      <!-- Layer 1 — main colour wave -->
+      <svg class="portal-wave-svg l1" viewBox="0 0 1000 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="portal-wg1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#7fffd4" stop-opacity=".9"/>
+            <stop offset="25%"  stop-color="#00d4d8" stop-opacity=".85"/>
+            <stop offset="55%"  stop-color="#6c63ff" stop-opacity=".82"/>
+            <stop offset="80%"  stop-color="#ff5fd2" stop-opacity=".78"/>
+            <stop offset="100%" stop-color="#7fffd4" stop-opacity=".5"/>
+          </linearGradient>
+          <filter id="portal-glow1" x="-10%" y="-40%" width="120%" height="180%">
+            <feGaussianBlur stdDeviation="8" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <path d="M0 140 C100 100 180 115 270 128 C380 145 430 55 540 90 C650 125 720 168 870 95 C930 72 970 80 1000 70 L1000 220 L0 220 Z"
+          fill="url(#portal-wg1)" filter="url(#portal-glow1)" opacity=".82"/>
+        <path d="M0 165 C120 128 210 140 310 152 C420 165 465 90 580 118 C690 145 760 172 920 128 C960 116 985 110 1000 105 L1000 220 L0 220 Z"
+          fill="#ffffff" opacity=".15"/>
+      </svg>
+
+      <!-- Layer 2 — violet-pink -->
+      <svg class="portal-wave-svg l2" viewBox="0 0 1000 170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="portal-wg2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#6c63ff"/>
+            <stop offset="50%"  stop-color="#ff5fd2"/>
+            <stop offset="100%" stop-color="#00d4d8"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 110 C80 70 160 90 260 102 C370 116 440 40 560 72 C680 105 740 140 900 88 C950 72 980 66 1000 60 L1000 170 L0 170 Z"
+          fill="url(#portal-wg2)" opacity=".45"/>
+      </svg>
+
+      <!-- Layer 3 — soft aqua -->
+      <svg class="portal-wave-svg l3" viewBox="0 0 1000 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="portal-wg3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#7fffd4"/>
+            <stop offset="100%" stop-color="#6c63ff"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 90 C150 55 250 75 380 84 C510 92 580 30 720 58 C840 84 920 108 1000 78 L1000 130 L0 130 Z"
+          fill="url(#portal-wg3)" opacity=".35"/>
+      </svg>
+    </div>
+
+    <div class="portal-header-text">
+      <div class="portal-title">WORKFLOW</div>
+      <div class="portal-title-sub2">Requests &amp; Workflows</div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════ QUICK ACTIONS ═══════════ -->
+  <div class="portal-section">
+    <div class="portal-section-label">Quick Actions -  Η ΠΡΟΣΒΑΣΗ ΕΞΑΡΤΑΤΑΙ ΑΠΟ ΤΟΝ ΡΟΛΟ ΣΑΣ ΣΤΟ ΣΥΣΤΗΜΑ</div>
+    <div class="portal-grid">
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#00d4d8,#6c63ff,#ff5fd2);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#00d4d8 0%,#6c63ff 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+        </div>
+        <div class="portal-card-kicker">Time Off</div>
+        <div class="portal-card-title">Submit Leave Request</div>
+        <div class="portal-card-desc">Start your request and send it through the approval flow in a few clicks.</div>
+        <div class="portal-card-cta">Submit Request →</div>
+      </a>
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#6c63ff,#9b7cff,#ff5fd2);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#6c63ff 0%,#9b7cff 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5M9.5 13h5M9.5 17h5"/></svg>
+        </div>
+        <div class="portal-card-kicker">Contract Flow</div>
+        <div class="portal-card-title">Create New Contract</div>
+        <div class="portal-card-desc">Start a new contract and route it through the required approval process.</div>
+        <div class="portal-card-cta">Create Contract →</div>
+      </a>
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#6c63ff,#ff5fd2,#ff5fd2);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#6c63ff 0%,#ff5fd2 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m8.5 12.5 2.2 2.2 4.8-5.1"/></svg>
+        </div>
+        <div class="portal-card-kicker">Contract Records</div>
+        <div class="portal-card-title">Running Contracts</div>
+        <div class="portal-card-desc">Review active contract records, track progress and send automated reminders.</div>
+        <div class="portal-card-cta">Open Contracts →</div>
+      </a>
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#6c63ff,#9b7cff,#ff5fd2);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#6c63ff 0%,#9b7cff 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/><path d="M12 14v2M9 14v2M15 14v2"/></svg>
+        </div>
+        <div class="portal-card-kicker">Customer &amp; Order</div>
+        <div class="portal-card-title">Create Customer / Order Details</div>
+        <div class="portal-card-desc">Enter customer and order details to kick off the contract workflow.</div>
+        <div class="portal-card-cta">Create Details →</div>
+      </a>
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#ff5fd2,#00d4d8,#7fffd4);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#ff5fd2 0%,#00d4d8 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 7h11M9 12h11M9 17h11"/><path d="m4 7 1 1 2-2M4 12l1 1 2-2M4 17l1 1 2-2"/></svg>
+        </div>
+        <div class="portal-card-kicker">Action Center</div>
+        <div class="portal-card-title">Pending Tasks</div>
+        <div class="portal-card-desc">Check the items waiting for review, approval, or follow-up action.</div>
+        <div class="portal-card-cta">Open Tasks →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="portal-divider"></div>
+
+  <!-- ═══════════ YOUR RECORDS ═══════════ -->
+  <div class="portal-section">
+    <div class="portal-section-label">Your Records</div>
+    <div class="portal-grid cols-2">
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#aeb7c6,#6c63ff,#ff5fd2);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#aeb7c6 0%,#6c63ff 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M3 4h18v3H3zM9 11h6"/></svg>
+        </div>
+        <div class="portal-card-title">Contracts</div>
+        <div class="portal-card-desc">Access contract records and review submitted documents across all workflows.</div>
+        <div class="portal-card-cta">View Records →</div>
+      </a>
+
+   <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#7fffd4,#6c63ff,#ff5fd2);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#7fffd4 0%,#6c63ff 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>
+        </div>
+        <div class="portal-card-title">Leave History - Cancel</div>
+        <div class="portal-card-desc">Select a leave request from the list to view its details.</div>
+        <div class="portal-card-cta">Open →</div>
+      </a>
+
+
+
+
+
+    </div>
+  </div>
+
+  <div class="portal-divider"></div>
+
+  <!-- ═══════════ TOOLS ═══════════ 
+  <div class="portal-section">
+    <div class="portal-section-label">Tools &amp; Resources</div>
+    <div class="portal-grid cols-3">
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#3ce8b0,#00d4d8,#6c63ff);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#3ce8b0 0%,#00d4d8 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="portal-card-kicker">Workflows</div>
+        <div class="portal-card-title">Active Workflows</div>
+        <div class="portal-card-desc">Monitor all running workflows and their current stages in one place.</div>
+        <div class="portal-card-cta">View All →</div>
+      </a>
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#f6a623,#ff5fd2,#6c63ff);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#f6a623 0%,#ff5fd2 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="portal-card-kicker">Search</div>
+        <div class="portal-card-title">Document Search</div>
+        <div class="portal-card-desc">Find any document, contract or record across the entire repository.</div>
+        <div class="portal-card-cta">Search Docs →</div>
+      </a>
+
+      <a class="portal-card" href="#">
+        <span class="portal-card-bar" style="background:linear-gradient(90deg,#7fffd4,#00d4d8,#6c63ff);"></span>
+        <span class="portal-card-glow" style="background:radial-gradient(circle,#7fffd4 0%,#00d4d8 55%,transparent 70%);"></span>
+        <div class="portal-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </div>
+        <div class="portal-card-kicker">Repository</div>
+        <div class="portal-card-title">Full Repository</div>
+        <div class="portal-card-desc">Browse all categories and folders within the document repository.</div>
+        <div class="portal-card-cta">Browse Repo →</div>
+      </a>
+
+    </div>
+  </div>
+  -->
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <div class="portal-footer">
+    Workflow Portal &nbsp;·&nbsp; Requests &amp; Workflows
+  </div>
+
+  </div>
+
+</body>
+</html>
